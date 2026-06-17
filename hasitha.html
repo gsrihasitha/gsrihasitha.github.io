@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sri Hasitha — DevOps / Site Reliability Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy: #0E1B2C;
+  --navy-soft: #16263D;
+  --blue: #2E6FF2;
+  --blue-soft: #E8EFFE;
+  --paper: #FFFFFF;
+  --bg: #F7F9FC;
+  --text: #1A2235;
+  --text-dim: #5B6577;
+  --text-faint: #9AA3B5;
+  --line: #E6EAF0;
+  --display: 'Poppins', sans-serif;
+  --sans: 'Inter', sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--sans);
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--blue);text-decoration:none;}
+a:focus-visible, button:focus-visible{outline:2px solid var(--blue);outline-offset:3px;}
+.wrap{max-width:1000px;margin:0 auto;padding:0 28px;}
+
+/* ===== Nav ===== */
+.topnav{
+  background:var(--navy);
+  padding:18px 0;
+  position:sticky;top:0;z-index:50;
+}
+.topnav .wrap{display:flex;justify-content:space-between;align-items:center;}
+.brand{font-family:var(--display);font-weight:700;font-size:19px;color:#fff;}
+.brand span{color:var(--blue);}
+.topnav nav{display:flex;gap:30px;}
+.topnav nav a{
+  color:#C7D0E0;font-size:13.5px;font-weight:500;
+}
+.topnav nav a:hover{color:#fff;}
+@media (max-width:680px){ .topnav nav{display:none;} }
+
+/* ===== Hero ===== */
+.hero{
+  background:var(--navy);
+  color:#fff;
+  padding:90px 0 100px;
+  position:relative;
+  overflow:hidden;
+}
+.hero::after{
+  content:'';
+  position:absolute;right:-120px;top:-120px;
+  width:420px;height:420px;border-radius:50%;
+  background:radial-gradient(circle, rgba(46,111,242,0.25), transparent 70%);
+}
+.hero .wrap{position:relative;z-index:1;}
+.hero-greet{
+  font-size:15px;color:var(--blue);font-weight:600;margin-bottom:14px;
+  display:flex;align-items:center;gap:8px;
+}
+.hero-greet .line{width:34px;height:2px;background:var(--blue);display:inline-block;}
+.hero h1{
+  font-family:var(--display);
+  font-size:clamp(34px,5.5vw,52px);
+  font-weight:700;
+  line-height:1.15;
+  margin-bottom:14px;
+}
+.hero h1 .name{color:#fff;}
+.role-rotate{
+  font-family:var(--display);
+  font-size:clamp(20px,3vw,26px);
+  font-weight:600;
+  color:var(--blue);
+  margin-bottom:24px;
+  min-height:34px;
+}
+.hero p.lead{
+  max-width:560px;color:#AAB4C8;font-size:15.5px;margin-bottom:34px;
+}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:40px;}
+.btn{
+  font-size:14px;font-weight:600;
+  padding:13px 26px;border-radius:6px;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:transform .12s, opacity .12s, background .15s;
+}
+.btn:hover{transform:translateY(-1px);}
+.btn-primary{background:var(--blue);color:#fff;}
+.btn-primary:hover{background:#2560D8;}
+.btn-outline{background:transparent;border:1.5px solid #3A4A66;color:#fff;}
+.btn-outline:hover{border-color:var(--blue);color:var(--blue);}
+.btn svg{width:15px;height:15px;}
+
+.skill-strip{display:flex;flex-wrap:wrap;gap:10px;}
+.skill-chip{
+  display:flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:8px;
+  padding:9px 14px;
+  font-size:13px;font-weight:500;color:#D5DCEA;
+}
+.skill-chip .dot{width:7px;height:7px;border-radius:50%;background:var(--blue);}
+
+/* ===== Section scaffolding ===== */
+section{padding:80px 0;}
+.eyebrow{
+  text-align:center;font-size:13px;font-weight:700;color:var(--blue);
+  text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;
+}
+.section-title{
+  text-align:center;font-family:var(--display);font-size:32px;font-weight:700;
+  color:var(--text);margin-bottom:46px;
+}
+.bg-alt{background:var(--paper);}
+
+/* ===== Services / What I can do ===== */
+.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.service-card{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:28px 22px;
+  transition:transform .15s, box-shadow .15s;
+}
+.service-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(20,30,50,0.08);}
+.service-icon{
+  width:46px;height:46px;border-radius:10px;
+  background:var(--blue-soft);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:18px;
+}
+.service-icon svg{width:22px;height:22px;color:var(--blue);}
+.service-card h3{font-size:16px;font-weight:600;margin-bottom:8px;color:var(--text);}
+.service-card p{font-size:13.5px;color:var(--text-dim);}
+@media (max-width:900px){ .services-grid{grid-template-columns:repeat(2,1fr);} }
+@media (max-width:560px){ .services-grid{grid-template-columns:1fr;} }
+
+/* ===== Profile summary ===== */
+.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:flex-start;}
+.profile-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px;}
+.stat-card{
+  background:var(--bg);
+  border-radius:10px;
+  padding:20px;
+  text-align:center;
+}
+.stat-val{font-family:var(--display);font-size:28px;font-weight:700;color:var(--blue);}
+.stat-label{font-size:12px;color:var(--text-dim);margin-top:4px;}
+.profile-text p{color:var(--text-dim);font-size:14.5px;margin-bottom:14px;}
+.profile-text p strong{color:var(--text);font-weight:600;}
+@media (max-width:760px){ .profile-grid{grid-template-columns:1fr;} }
+
+/* ===== Resume tabs ===== */
+.tabs{display:flex;justify-content:center;gap:12px;margin-bottom:44px;}
+.tab-btn{
+  font-family:var(--display);font-weight:600;font-size:14px;
+  padding:12px 28px;border-radius:30px;
+  background:var(--paper);border:1px solid var(--line);color:var(--text-dim);
+  cursor:pointer;transition:background .15s,color .15s;
+}
+.tab-btn.active{background:var(--navy);color:#fff;border-color:var(--navy);}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+.timeline-col{display:flex;flex-direction:column;gap:0;}
+.tl-entry{
+  position:relative;padding:0 0 32px 32px;
+  border-left:2px solid var(--line);
+  margin-left:6px;
+}
+.tl-entry:last-child{padding-bottom:0;}
+.tl-entry::before{
+  content:'';position:absolute;left:-7px;top:2px;
+  width:12px;height:12px;border-radius:50%;
+  background:var(--blue);border:3px solid var(--paper);
+}
+.tl-date{font-size:12px;font-weight:600;color:var(--blue);margin-bottom:4px;}
+.tl-role{font-family:var(--display);font-size:17px;font-weight:600;color:var(--text);margin-bottom:2px;}
+.tl-org{font-size:13.5px;color:var(--text-dim);margin-bottom:12px;}
+.tl-list{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.tl-list li{font-size:13.5px;color:var(--text-dim);padding-left:16px;position:relative;}
+.tl-list li::before{content:'•';position:absolute;left:0;color:var(--blue);}
+
+/* skill bars */
+.skillbars{display:flex;flex-direction:column;gap:22px;max-width:680px;margin:0 auto;}
+.skillbar-row{display:flex;flex-direction:column;gap:8px;}
+.skillbar-top{display:flex;justify-content:space-between;font-size:14px;font-weight:600;color:var(--text);}
+.skillbar-pct{color:var(--blue);font-family:var(--display);}
+.skillbar-track{height:8px;background:var(--line);border-radius:6px;overflow:hidden;}
+.skillbar-fill{
+  height:100%;background:linear-gradient(90deg,var(--blue),#5B93FF);
+  border-radius:6px;width:0;
+  transition:width 1.1s cubic-bezier(.2,.8,.2,1);
+}
+
+/* ===== Certifications grid ===== */
+.cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.cert-card{
+  background:var(--paper);border:1px solid var(--line);border-radius:12px;
+  padding:26px 22px;text-align:center;
+}
+.cert-icon{
+  width:52px;height:52px;border-radius:50%;
+  background:var(--blue-soft);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 16px;
+}
+.cert-icon svg{width:24px;height:24px;color:var(--blue);}
+.cert-name{font-size:14.5px;font-weight:600;color:var(--text);margin-bottom:4px;}
+.cert-org{font-size:12.5px;color:var(--text-faint);}
+@media (max-width:760px){ .cert-grid{grid-template-columns:1fr 1fr;} }
+@media (max-width:520px){ .cert-grid{grid-template-columns:1fr;} }
+
+/* ===== Career goals ===== */
+.goals-wrap{
+  max-width:700px;margin:0 auto;text-align:center;
+}
+.goals-wrap p{color:var(--text-dim);font-size:16px;margin-bottom:16px;}
+
+/* ===== Contact / footer ===== */
+.contact-section{background:var(--navy);color:#fff;text-align:center;}
+.contact-section .section-title{color:#fff;}
+.contact-section .eyebrow{color:var(--blue);}
+.contact-row{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:30px;}
+.contact-card{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:10px;
+  padding:18px 26px;
+  display:flex;align-items:center;gap:12px;
+  color:#fff;
+  min-width:220px;
+}
+.contact-card svg{width:18px;height:18px;color:var(--blue);flex-shrink:0;}
+.contact-card-label{font-size:11px;color:#9AA3B5;display:block;}
+.contact-card-val{font-size:14px;font-weight:600;color:#fff;}
+
+footer{
+  background:#0A1320;color:#7A859B;text-align:center;
+  padding:22px 0;font-size:12.5px;
+}
+
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <div class="wrap">
+    <span class="brand">Sri<span>Hasitha</span></span>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#profile">Profile</a>
+      <a href="#resume">Resume</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero" id="home">
+  <div class="wrap">
+    <div class="hero-greet"><span class="line"></span> WELCOME TO MY INFRASTRUCTURE JOURNEY</div>
+    <h1>Hi, I'm <span class="name">Sri Hasitha</span></h1>
+    <div class="role-rotate" id="role-rotate">DevOps Engineer.</div>
+    <p class="lead">An AWS-certified DevOps and Site Reliability Engineer with 5 years of experience designing, automating, and operating cloud infrastructure across AWS and Azure for production-grade, high-availability systems.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="mailto:srihasitha17@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4V4z"/><path d="M4 4l8 8 8-8"/></svg>
+        Get in touch
+      </a>
+      <a class="btn btn-outline" href="https://www.linkedin.com/in/sri-hasitha" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 11v5M8 8v.01M12 16v-3a2 2 0 0 1 4 0v3M12 13v3"/></svg>
+        LinkedIn
+      </a>
+    </div>
+    <div class="skill-strip">
+      <span class="skill-chip"><span class="dot"></span>AWS</span>
+      <span class="skill-chip"><span class="dot"></span>Azure</span>
+      <span class="skill-chip"><span class="dot"></span>Kubernetes</span>
+      <span class="skill-chip"><span class="dot"></span>Terraform</span>
+      <span class="skill-chip"><span class="dot"></span>CI/CD</span>
+      <span class="skill-chip"><span class="dot"></span>Docker</span>
+      <span class="skill-chip"><span class="dot"></span>Python</span>
+    </div>
+  </div>
+</header>
+
+<section id="services">
+  <div class="wrap">
+    <div class="eyebrow">Services</div>
+    <h2 class="section-title">What I Can Do For You</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 17l6-6-6-6"/><path d="M12 19h8"/></svg></div>
+        <h3>CI/CD Pipeline Design</h3>
+        <p>Build and migrate pipelines across Jenkins, GitHub Actions, and GitLab CI/CD for reliable, repeatable deployments.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
+        <h3>Kubernetes & Containers</h3>
+        <p>Deploy and manage containerized workloads on EKS and AKS with Helm and GitOps-based release strategies.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <h3>Infrastructure as Code</h3>
+        <p>Author reusable Terraform and CloudFormation modules for consistent, scalable multi-environment infrastructure.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></div>
+        <h3>Observability & SRE</h3>
+        <p>Implement SLI/SLO monitoring, alerting, and incident response practices using Datadog, Prometheus, and Grafana.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <h3>Cloud Cost Optimization</h3>
+        <p>Right-size resources and apply capacity planning to reduce cloud spend without sacrificing performance.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M5 8l7-7 7 7M5 16l7 7 7-7"/></svg></div>
+        <h3>Multi-Cloud Migration</h3>
+        <p>Plan and execute workload migrations across AWS, Azure, and GCP with minimal downtime.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div>
+        <h3>Security & Compliance</h3>
+        <p>Configure IAM, networking, and secrets management aligned with security best practices and RBAC.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 11-12h-7l1-8z"/></svg></div>
+        <h3>Automation Tooling</h3>
+        <p>Develop Python and Bash automation for deployment validation, health checks, and operational reporting.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="profile" class="bg-alt">
+  <div class="wrap">
+    <div class="eyebrow">Professional Snapshot</div>
+    <h2 class="section-title">My Profile</h2>
+    <div class="profile-grid">
+      <div class="profile-text">
+        <p>Site Reliability and DevOps Engineer with <strong>5 years of experience</strong> designing and automating cloud infrastructure and CI/CD pipelines across AWS and Azure.</p>
+        <p>Expert in infrastructure as code with <strong>Terraform and CloudFormation</strong>, and in migrating legacy Jenkins workflows to <strong>GitHub Actions</strong> for improved deployment reliability and consistency.</p>
+        <p>Skilled in <strong>Kubernetes</strong> container orchestration and observability tooling to maintain high availability — currently sustaining <strong>99.9% uptime</strong> in production at General Motors.</p>
+        <p>Holds an <strong>AWS Solutions Architect – Associate</strong> certification, with hands-on production experience spanning automotive, medical device, and enterprise IT environments.</p>
+      </div>
+      <div class="profile-stats">
+        <div class="stat-card"><div class="stat-val">5+</div><div class="stat-label">Years experience</div></div>
+        <div class="stat-card"><div class="stat-val">33%</div><div class="stat-label">MTTR reduction</div></div>
+        <div class="stat-card"><div class="stat-val">50+</div><div class="stat-label">Microservices managed</div></div>
+        <div class="stat-card"><div class="stat-val">99.9%</div><div class="stat-label">Platform uptime</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="resume">
+  <div class="wrap">
+    <div class="eyebrow">Over 5+ Years of Experience</div>
+    <h2 class="section-title">My Resume</h2>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="exp">Experience & Education</button>
+      <button class="tab-btn" data-tab="skills">Professional Skills</button>
+    </div>
+
+    <div class="tab-panel active" id="tab-exp">
+      <div class="timeline-col">
+        <div class="tl-entry">
+          <div class="tl-date">MAY 2024 — PRESENT</div>
+          <div class="tl-role">DevOps / Site Reliability Engineer</div>
+          <div class="tl-org">General Motors, Warren MI</div>
+          <ul class="tl-list">
+            <li>Optimized Azure infrastructure and CI/CD for connected vehicle and fleet platforms across distributed microservices.</li>
+            <li>Migrated Jenkins pipelines to GitHub Actions; cut MTTR by 33% via centralized Datadog/Splunk/ELK observability.</li>
+            <li>Maintained 99.9% availability applying SLI/SLO monitoring and SRE incident response practices.</li>
+          </ul>
+        </div>
+        <div class="tl-entry">
+          <div class="tl-date">SEP 2023 — APR 2024</div>
+          <div class="tl-role">AWS DevOps Engineer</div>
+          <div class="tl-org">Arthrex, Naples FL</div>
+          <ul class="tl-list">
+            <li>Designed CI/CD pipelines with GitLab CI/CD and Jenkins, reducing release time by 40%.</li>
+            <li>Built reusable Terraform modules with remote state, improving environment consistency.</li>
+            <li>Implemented Prometheus/Grafana/CloudWatch monitoring, cutting downtime by 30%.</li>
+          </ul>
+        </div>
+        <div class="tl-entry">
+          <div class="tl-date">MAY 2021 — JUL 2022</div>
+          <div class="tl-role">DevOps Engineer</div>
+          <div class="tl-org">Tata Consultancy Services, Hyderabad</div>
+          <ul class="tl-list">
+            <li>Managed Kubernetes (EKS/AKS) clusters with auto-scaling for containerized microservices.</li>
+            <li>Implemented GitOps deployments via Argo CD/Helm with blue-green and rolling strategies.</li>
+            <li>Cut manual operational effort by 30% through Terraform and Ansible Tower automation.</li>
+          </ul>
+        </div>
+        <div class="tl-entry">
+          <div class="tl-date">JUL 2019 — APR 2021</div>
+          <div class="tl-role">Cloud Engineer</div>
+          <div class="tl-org">SKYDROP Tech Pro, Hyderabad</div>
+          <ul class="tl-list">
+            <li>Built CI/CD pipelines with Jenkins and Git across multiple environments.</li>
+            <li>Provisioned AWS infrastructure (EC2, S3, VPC, IAM, Auto Scaling) for scalable environments.</li>
+          </ul>
+        </div>
+        <div class="tl-entry">
+          <div class="tl-date">EDUCATION</div>
+          <div class="tl-role">M.S. Computer & Information Sciences</div>
+          <div class="tl-org">Florida Atlantic University</div>
+        </div>
+        <div class="tl-entry">
+          <div class="tl-date">EDUCATION</div>
+          <div class="tl-role">Bachelor's Degree, Computer Science</div>
+          <div class="tl-org">KL University</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-skills">
+      <div class="skillbars">
+        <div class="skillbar-row">
+          <div class="skillbar-top"><span>AWS</span><span class="skillbar-pct">90%</span></div>
+          <div class="skillbar-track"><div class="skillbar-fill" data-pct="90"></div></div>
+        </div>
+        <div class="skillbar-row">
+          <div class="skillbar-top"><span>Kubernetes</span><span class="skillbar-pct">85%</span></div>
+          <div class="skillbar-track"><div class="skillbar-fill" data-pct="85"></div></div>
+        </div>
+        <div class="skillbar-row">
+          <div class="skillbar-top"><span>Terraform</span><span class="skillbar-pct">85%</span></div>
+          <div class="skillbar-track"><div class="skillbar-fill" data-pct="85"></div></div>
+        </div>
+        <div class="skillbar-row">
+          <div class="skillbar-top"><span>CI/CD (Jenkins, GitHub Actions, GitLab)</span><span class="skillbar-pct">88%</span></div>
+          <div class="skillbar-track"><div class="skillbar-fill" data-pct="88"></div></div>
+        </div>
+        <div class="skillbar-row">
+          <div class="skillbar-top"><span>Azure</span><span class="skillbar-pct">80%</span></div>
+          <div class="skillbar-track"><div class="skillbar-fill" data-pct="80"></div></div>
+        </div>
+        <div class="skillbar-row">
+          <div class="skillbar-top"><span>Docker</span><span class="skillbar-pct">85%</span></div>
+          <div class="skillbar-track"><div class="skillbar-fill" data-pct="85"></div></div>
+        </div>
+        <div class="skillbar-row">
+          <div class="skillbar-top"><span>Observability (Prometheus, Grafana, Datadog)</span><span class="skillbar-pct">82%</span></div>
+          <div class="skillbar-track"><div class="skillbar-fill" data-pct="82"></div></div>
+        </div>
+        <div class="skillbar-row">
+          <div class="skillbar-top"><span>Python / Bash</span><span class="skillbar-pct">75%</span></div>
+          <div class="skillbar-track"><div class="skillbar-fill" data-pct="75"></div></div>
+        </div>
+        <div class="skillbar-row">
+          <div class="skillbar-top"><span>Ansible</span><span class="skillbar-pct">65%</span></div>
+          <div class="skillbar-track"><div class="skillbar-fill" data-pct="65"></div></div>
+        </div>
+        <div class="skillbar-row">
+          <div class="skillbar-top"><span>GCP</span><span class="skillbar-pct">55%</span></div>
+          <div class="skillbar-track"><div class="skillbar-fill" data-pct="55"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certifications" class="bg-alt">
+  <div class="wrap">
+    <div class="eyebrow">Endorsements of Skills</div>
+    <h2 class="section-title">Certifications</h2>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div class="cert-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l9 4.5-9 4.5-9-4.5L12 2z"/><path d="M3 12l9 4.5 9-4.5"/></svg></div>
+        <div class="cert-name">AWS Solutions Architect – Associate</div>
+        <div class="cert-org">Amazon Web Services</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l9 4.5-9 4.5-9-4.5L12 2z"/><path d="M3 12l9 4.5 9-4.5"/></svg></div>
+        <div class="cert-name">Salesforce Certified Administrator</div>
+        <div class="cert-org">Salesforce</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l9 4.5-9 4.5-9-4.5L12 2z"/><path d="M3 12l9 4.5 9-4.5"/></svg></div>
+        <div class="cert-name">RPA Professional</div>
+        <div class="cert-org">Automation Anywhere Essentials</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="goals">
+  <div class="wrap">
+    <div class="eyebrow">Looking Ahead</div>
+    <h2 class="section-title">Career Goals</h2>
+    <div class="goals-wrap">
+      <p>I'm looking to grow into senior DevOps and SRE roles where I can own reliability for platforms at meaningful scale — places where uptime, automation, and developer experience are treated as first-class engineering problems.</p>
+      <p>Long term, I want to deepen my expertise in service mesh architectures and observability tooling, while mentoring engineers earlier in their DevOps careers.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact-section">
+  <div class="wrap">
+    <div class="eyebrow">Get In Touch</div>
+    <h2 class="section-title">Contact</h2>
+    <p style="color:#AAB4C8;max-width:500px;margin:0 auto;">Open to DevOps, SRE, and Cloud Infrastructure roles — full-time or contract.</p>
+    <div class="contact-row">
+      <a class="contact-card" href="mailto:srihasitha17@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4V4z"/><path d="M4 4l8 8 8-8"/></svg>
+        <span>
+          <span class="contact-card-label">EMAIL</span>
+          <span class="contact-card-val">srihasitha17@gmail.com</span>
+        </span>
+      </a>
+      <a class="contact-card" href="tel:+17542827747">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5a2 2 0 0 1 2-2h2l2 5-2 1a11 11 0 0 0 6 6l1-2 5 2v2a2 2 0 0 1-2 2 16 16 0 0 1-14-14z"/></svg>
+        <span>
+          <span class="contact-card-label">PHONE</span>
+          <span class="contact-card-val">(754) 282-2747</span>
+        </span>
+      </a>
+      <a class="contact-card" href="https://www.linkedin.com/in/sri-hasitha" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 11v5M8 8v.01M12 16v-3a2 2 0 0 1 4 0v3M12 13v3"/></svg>
+        <span>
+          <span class="contact-card-label">LINKEDIN</span>
+          <span class="contact-card-val">linkedin.com/in/sri-hasitha</span>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026. Portfolio of Sri Hasitha G — DevOps / Site Reliability Engineer
+</footer>
+
+<script>
+// Rotating role titles
+const roles = ["DevOps Engineer.", "Site Reliability Engineer.", "Cloud Infrastructure Engineer.", "AWS & Azure Specialist."];
+let roleIdx = 0;
+const roleEl = document.getElementById('role-rotate');
+function rotateRole(){
+  roleIdx = (roleIdx + 1) % roles.length;
+  roleEl.style.opacity = 0;
+  setTimeout(()=>{ roleEl.textContent = roles[roleIdx]; roleEl.style.opacity = 1; }, 250);
+}
+roleEl.style.transition = 'opacity .25s';
+setInterval(rotateRole, 2600);
+
+// Tabs
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    if(btn.dataset.tab === 'skills'){ animateBars(); }
+  });
+});
+
+// Animated skill bars (trigger once visible)
+let barsAnimated = false;
+function animateBars(){
+  if(barsAnimated) return;
+  barsAnimated = true;
+  document.querySelectorAll('.skillbar-fill').forEach(el=>{
+    const pct = el.getAttribute('data-pct');
+    requestAnimationFrame(()=>{ el.style.width = pct + '%'; });
+  });
+}
+const skillsObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){ animateBars(); }
+  });
+}, {threshold:0.3});
+skillsObserver.observe(document.getElementById('tab-skills'));
+</script>
+
+</body>
+</html>
